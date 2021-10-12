@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>images/account_cog_icon_137995.png</file>
+        <file>images/ceiling_light_icon_136808.png</file>
+        <file>images/chart_bell_curve_cumulative_icon_138778.png</file>
+        <file>images/cog_icon_136748.png</file>
+        <file>images/human_male_height_icon_135489.png</file>
+        <file>images/map_marker_radius_icon_137422.png</file>
+        <file>images/molecule_co_icon_138369.png</file>
+        <file>images/ninja_icon_137361.png</file>
+        <file>images/shield_lock_icon_136215.png</file>
+        <file>images/tools_icon_137091.png</file>
+        <file>DevicePopup.qml</file>
+    </qresource>
+</RCC>
