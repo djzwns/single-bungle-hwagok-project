@@ -18,6 +18,9 @@ public:
 signals:
     void signalDeviceConnect(QVariant);
 
+private slots:
+    void slotRecvData(QVariant);
+
 private:
     QQuickWindow *mainView;
 

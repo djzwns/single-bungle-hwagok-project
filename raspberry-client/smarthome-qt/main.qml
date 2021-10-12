@@ -16,15 +16,19 @@ Window {
     minimumWidth: width
     minimumHeight: height
 
+    signal sendData(var sendMsg)
+
     DevicePopup {
         id: popup
         onButtonAllowClicked: {
             // popup signal execute
             // send to server: [admin]ACCOUNTOK
+            sendData("[admin]ACCOUNTOK\n")
         }
         onButtonDenyClicked: {
             // popup signal execute
             // send to server: [admin]ACCOUNTFAIL
+            sendData("[admin]ACCOUNTFAIL\n")
         }
     }
 

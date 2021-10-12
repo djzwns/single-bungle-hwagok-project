@@ -28,6 +28,11 @@ Item {
             width: 250
             height: 140
             radius: 20
+            transform: Scale {
+                id: popupScale
+                origin.x: parent.width * 0.25
+                origin.y: parent.height * 0.25
+            }
 
             layer {
                 enabled: true
@@ -107,10 +112,9 @@ Item {
 
         enter: Transition {
             ParallelAnimation {
-                running: true
                 NumberAnimation {
-                    target: devicePopup
-                    properties: "scale"
+                    target: popupScale
+                    properties: "xScale, yScale"
                     from: 0.6
                     to: 1
                     duration: 100
@@ -128,10 +132,9 @@ Item {
 
         exit: Transition {
             ParallelAnimation {
-                running: true
                 NumberAnimation {
-                    target: devicePopup
-                    properties: "scale"
+                    target: popupScale
+                    properties: "xScale, yScale"
                     from: 1
                     to: 0.6
                     duration: 100
