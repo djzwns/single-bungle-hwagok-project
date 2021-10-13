@@ -32,6 +32,10 @@ Window {
         }
     }
 
+    SwipePage {
+        anchors.fill: parent
+    }
+
     function slotDeviceConnect(deviceId) {
         popup.openDevicePopup(deviceId);
     }

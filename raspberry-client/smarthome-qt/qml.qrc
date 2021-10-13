@@ -12,5 +12,8 @@
         <file>images/shield_lock_icon_136215.png</file>
         <file>images/tools_icon_137091.png</file>
         <file>DevicePopup.qml</file>
+        <file>SwipePage.qml</file>
+        <file>HomeTabPage.qml</file>
+        <file>RadialBar.qml</file>
     </qresource>
 </RCC>
