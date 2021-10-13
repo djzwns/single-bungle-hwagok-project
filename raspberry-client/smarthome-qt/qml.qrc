@@ -15,5 +15,6 @@
         <file>SwipePage.qml</file>
         <file>HomeTabPage.qml</file>
         <file>RadialBar.qml</file>
+        <file>colorhelper.js</file>
     </qresource>
 </RCC>

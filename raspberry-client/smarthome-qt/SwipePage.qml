@@ -13,7 +13,9 @@ Item {
         // my pages add..
         Item {
 
-            HomeTabPage {}
+            HomeTabPage {
+                id: homeTab
+            }
         }
         Item {
             Rectangle {
@@ -59,5 +61,9 @@ Item {
         TabButton {
             text: "Config"
         }
+    }
+
+    function setTemp(temp) {
+        homeTab.setTemp(temp)
     }
 }

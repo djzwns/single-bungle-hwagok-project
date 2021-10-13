@@ -1,12 +1,13 @@
 import QtQuick 2.11
 import QtQuick.Shapes 1.12
+import QtGraphicalEffects 1.0
 // https://github.com/arunpkqt/RadialBarDemo/blob/master/RadialBarShape.qml
 
 Item {
     id: radialBar
 
-    implicitWidth: 300
-    implicitHeight: 300
+    implicitWidth: 200
+    implicitHeight: 200
 
     enum DialType {
         FullDial,
@@ -15,24 +16,26 @@ Item {
     }
 
     property real startAngle: 40
-    property real spanAngle: 320
+    property real spanAngle: 280
     property real minValue: -20
     property real maxValue: 60
     property real value: 0
-    property int dialWidth: 15
+    property real valueGap: maxValue - minValue
+    property real valueRate: ((0 - minValue) + value) / valueGap
+    property int dialWidth: width * (15 / 300)
 
     property color backgroundColor: "transparent"
     property color dialColor: "#ff808080"
     property color progressColor: "#ffa51bab"
 
     property int penStyle: Qt.RoundCap
-    property int dialType: 1
+    property int dialType: RadialBar.DialType.MinToMax
 
     QtObject {
         id: internals
 
-        property bool isFullDial: radialBar.dialType === 0
-        property bool isNoDial: radialBar.dialType === 2
+        property bool isFullDial: radialBar.dialType === RadialBar.DialType.FullDial
+        property bool isNoDial: radialBar.dialType === RadialBar.DialType.NoDial
 
         property real baseRadius: Math.min(radialBar.width * 0.5, radialBar.height * 0.5)
         property real radiusOffset: internals.isFullDial ? radialBar.dialWidth * 0.5
@@ -96,8 +99,28 @@ Item {
                 centerX: radialBar.width * 0.5
                 centerY: radialBar.height * 0.5
                 startAngle: radialBar.startAngle - 270
-                sweepAngle: (internals.actualSpanAngle / radialBar.maxValue * radialBar.value)
+                sweepAngle: (internals.actualSpanAngle / (radialBar.maxValue - radialBar.minValue) * ((0 - radialBar.minValue) + radialBar.value))
             }
+        }
+    }
+    Text {
+        anchors.centerIn: parent
+        text: parseInt(radialBar.value.toString()) + "℃"
+        font.bold: true
+        font.pixelSize: 30
+    }
+
+
+    layer {
+        enabled: true
+        effect: DropShadow {
+            horizontalOffset: 3
+            verticalOffset: 3
+            radius: 4
+            samples: radius * 2
+            source: radialBar
+            color: Qt.rgba(0, 0, 0, 0.5)
+            transparentBorder: true
         }
     }
 }

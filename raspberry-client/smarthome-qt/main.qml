@@ -33,10 +33,15 @@ Window {
     }
 
     SwipePage {
+        id: swipe
         anchors.fill: parent
     }
 
     function slotDeviceConnect(deviceId) {
         popup.openDevicePopup(deviceId);
+    }
+
+    function slotSetTempurature(temp) {
+        swipe.setTemp(temp);
     }
 }
