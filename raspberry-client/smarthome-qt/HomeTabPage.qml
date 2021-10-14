@@ -27,6 +27,8 @@ Item {
     RadialBar {
         id: radial
         value: temperature.value
+        minValue: -20
+        maxValue: 40
         progressColor: ColorHelper.tempColorLerp(valueRate)
         width: 200
         height: 200

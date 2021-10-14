@@ -48,7 +48,16 @@ Item {
 
         TabButton {
             text: "Home"
-            onClicked: homeTab.animRestart()
+            property int status: 0
+            onClicked: function () {
+                if (status === 0)
+                    homeTab.setTemp(-5);
+                else if (status === 1)
+                    homeTab.setTemp(35);
+                else if (status === 2)
+                    homeTab.setTemp(17);
+                status = (status + 1) % 3;
+            }
         }
 
         TabButton {
