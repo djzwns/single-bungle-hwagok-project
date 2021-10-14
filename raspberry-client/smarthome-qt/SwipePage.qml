@@ -47,29 +47,33 @@ Item {
         currentIndex: swipeView.currentIndex
 
         TabButton {
-            text: "Home"
+//            text: "Home"
             property int status: 0
-            onClicked: function () {
-                if (status === 0)
-                    homeTab.setTemp(-5);
-                else if (status === 1)
-                    homeTab.setTemp(35);
-                else if (status === 2)
-                    homeTab.setTemp(17);
-                status = (status + 1) % 3;
+            onClicked: homeTab.animRestart()
+            icon {
+                source: "images/3844435-home-house_110321.png"
             }
         }
 
         TabButton {
-            text: "LED"
+//            text: "LED"
+            icon {
+                source: "images/ceiling_light_icon_136808.png"
+            }
         }
 
         TabButton {
-            text: "Air"
+//            text: "Air"
+            icon {
+                source: "images/wind-weather-lines-group-symbol_icon-icons.com_54629.png"
+            }
         }
 
         TabButton {
-            text: "Config"
+//            text: "Config"
+            icon {
+                source: "images/shield_lock_icon_136215.png"
+            }
         }
     }
 

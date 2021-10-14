@@ -16,5 +16,7 @@
         <file>HomeTabPage.qml</file>
         <file>RadialBar.qml</file>
         <file>colorhelper.js</file>
+        <file>images/3844435-home-house_110321.png</file>
+        <file>images/wind-weather-lines-group-symbol_icon-icons.com_54629.png</file>
     </qresource>
 </RCC>

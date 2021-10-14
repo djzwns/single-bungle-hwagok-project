@@ -17,6 +17,7 @@ public:
 
 signals:
     void signalDeviceConnect(QVariant);
+    void signalRecvTemperature(QVariant);
 
 private slots:
     void slotRecvData(QVariant);
