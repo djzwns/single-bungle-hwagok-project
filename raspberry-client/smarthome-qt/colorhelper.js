@@ -49,6 +49,20 @@ function colorStringHSVLerp(color1, color2, t) {
     return color
 }
 
+function tempColorLerp(t) {
+    let h = 240;
+    let s = 1;
+    let v = 1;
+
+    t = Math.max(0, Math.min(1, t));
+    let h_lerp = lerp(0, h, t);
+    let rgb = hsvToRGB(h - h_lerp, s, v);
+
+    let color = intToColor(parseInt(rgb.r), parseInt(rgb.g), parseInt(rgb.b), 255);
+    console.log(color);
+    return color
+}
+
 function rgbToHSV(r, g, b) {
     let r_p = r / 255;
     let g_p = g / 255;
@@ -78,43 +92,76 @@ function rgbToHSV(r, g, b) {
     return { h: h, s: s * 100, v: l * 100, };
 }
 
-function hsvToRGB(_h, _s, _v) {
+function hsvToRGB(h, s, v) {
     let r = 0;
     let g = 0;
     let b = 0;
-    let l = _v / 100;
-    let s = _s / 100;
-    let h = _h / 360;
-
-    if (s === 0) {
-        r = g = b = _v;
+    let c = v * s;
+    let x = c * (1 - Math.abs(((h / 60) % 2) - 1));
+    let m = v - c;
+    if (0 <= h && h < 60) {
+        r = c;
+        g = x;
+        b = 0;
+    } else if (60 <= h && h < 120) {
+        r = x;
+        g = c;
+        b = 0;
+    } else if (120 <= h && h < 180) {
+        r = 0;
+        g = c;
+        b = x;
+    } else if (180 <= h && h < 240) {
+        r = 0;
+        g = x;
+        b = c;
+    } else if (240 <= h && h < 300) {
+        r = x;
+        g = 0;
+        b = c;
+    } else if (300 <= h && h < 360) {
+        r = c;
+        g = 0;
+        b = x;
     }
-    else {
-        let temp1 = l < 0.5 ? l * (1 + s) : l + s - (l * s);
-        let temp2 = 2 * l - temp1;
-        let temp3 = 0;
-        for (let i = 0; i < 3; ++i) {
-            if (i === 0) { // red
-                temp3 = h + 0.33333;
-                if (temp3 > 1)
-                    temp3 -= 1;
-                r = hslToRGB_Sub(r, temp1, temp2, temp3);
-            } else if (i === 1) { // green
-                temp3 = h;
-                g = hslToRGB_Sub(g, temp1, temp2, temp3);
-            } else { // blue
-                temp3 = h - 0.33333;
-                if (temp3 < 0)
-                    temp3 += 1;
-                b = hslToRGB_Sub(b, temp1, temp2, temp3);
-            }
-        }
-    }
 
-    return { r: (r / 100) * 255, g: (g / 100) * 255, b: (b / 100) * 255, };
+    return { r: (r + m) * 255, g: (g + m) * 255, b: (b + m) * 255, };
+
+//    let l = _v / 100.0;
+//    let s = _s / 100.0;
+//    let h = _h / 360.0;
+
+//    if (s === 0) {
+//        r = g = b = _v;
+//    }
+//    else {
+//        let temp1 = l < 0.5 ? l * (1 + s) : l + s - (l * s);
+//        let temp2 = 2 * l - temp1;
+//        let temp3 = 0;
+//        for (let i = 0; i < 3; ++i) {
+//            if (i === 0) { // red
+//                temp3 = h + 0.33333;
+//                if (temp3 > 1)
+//                    temp3 -= 1;
+//                r = hslToRGB_Sub(temp1, temp2, temp3);
+//            } else if (i === 1) { // green
+//                temp3 = h;
+//                g = hslToRGB_Sub(temp1, temp2, temp3);
+//            } else { // blue
+//                temp3 = h - 0.33333;
+//                if (temp3 < 0)
+//                    temp3 += 1;
+//                b = hslToRGB_Sub(temp1, temp2, temp3);
+//            }
+//        }
+
+//        console.log(r, g, b);
+//    }
+//    return { r: (r / 100) * 255, g: (g / 100) * 255, b: (b / 100) * 255, };
 }
 
-function hslToRGB_Sub(c, t1, t2, t3) {
+function hslToRGB_Sub(t1, t2, t3) {
+    let c = 0;
     if ((t3 * 6) < 1) {
         c = (t2 + (t1 - t2) * 6 * t3) * 100;
     }

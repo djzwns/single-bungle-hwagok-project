@@ -27,7 +27,7 @@ Item {
     RadialBar {
         id: radial
         value: temperature.value
-        progressColor: ColorHelper.colorStringHSVLerp("#ff3299ff", "#ffff0e0e", valueRate)
+        progressColor: ColorHelper.tempColorLerp(valueRate)
         width: 200
         height: 200
         anchors.centerIn: parent
