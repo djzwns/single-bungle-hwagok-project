@@ -20,15 +20,16 @@ Window {
 
     DevicePopup {
         id: popup
+        property string deviceId: ""
         onButtonAllowClicked: {
             // popup signal execute
             // send to server: [admin]ACCOUNTOK
-            sendData("[admin]ACCOUNTOK\n")
+            sendData("[" + deviceId + "]ACCOUNTOK")
         }
         onButtonDenyClicked: {
             // popup signal execute
             // send to server: [admin]ACCOUNTFAIL
-            sendData("[admin]ACCOUNTFAIL\n")
+            sendData("[" + deviceId + "]ACCOUNTFAIL")
         }
     }
 
@@ -38,6 +39,7 @@ Window {
     }
 
     function slotDeviceConnect(deviceId) {
+        popup.deviceId = deviceId;
         popup.openDevicePopup(deviceId);
     }
 

@@ -1,4 +1,5 @@
-QT += quick
+QT += quick \
+    widgets
 
 CONFIG += c++11
 
@@ -15,7 +16,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         connectwindow.cpp \
-        main.cpp
+        main.cpp \
+        smarthomeclient.cpp
 
 RESOURCES += qml.qrc
 
@@ -31,6 +33,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    connectwindow.h
+    connectwindow.h \
+    smarthomeclient.h
 
 DISTFILES +=
