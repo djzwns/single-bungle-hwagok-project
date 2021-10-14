@@ -59,7 +59,7 @@ function tempColorLerp(t) {
     let rgb = hsvToRGB(h - h_lerp, s, v);
 
     let color = intToColor(parseInt(rgb.r), parseInt(rgb.g), parseInt(rgb.b), 255);
-    console.log(color);
+
     return color
 }
 
@@ -160,20 +160,20 @@ function hsvToRGB(h, s, v) {
 //    return { r: (r / 100) * 255, g: (g / 100) * 255, b: (b / 100) * 255, };
 }
 
-function hslToRGB_Sub(t1, t2, t3) {
-    let c = 0;
-    if ((t3 * 6) < 1) {
-        c = (t2 + (t1 - t2) * 6 * t3) * 100;
-    }
-    else {
-        if ((t3 * 2) < 1) {
-            c = t1 * 100;
-        }
-        else {
-            c = (t3 * 3) < 2 ? (t2 + (t1 - t2) * (0.66666 - t3) * 6) * 100
-                             : t2 * 100;
-        }
-    }
+//function hslToRGB_Sub(t1, t2, t3) {
+//    let c = 0;
+//    if ((t3 * 6) < 1) {
+//        c = (t2 + (t1 - t2) * 6 * t3) * 100;
+//    }
+//    else {
+//        if ((t3 * 2) < 1) {
+//            c = t1 * 100;
+//        }
+//        else {
+//            c = (t3 * 3) < 2 ? (t2 + (t1 - t2) * (0.66666 - t3) * 6) * 100
+//                             : t2 * 100;
+//        }
+//    }
 
-    return c;
-}
+//    return c;
+//}
