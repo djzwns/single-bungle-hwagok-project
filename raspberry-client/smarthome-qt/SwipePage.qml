@@ -48,6 +48,7 @@ Item {
 
         TabButton {
             text: "Home"
+            onClicked: homeTab.animRestart()
         }
 
         TabButton {

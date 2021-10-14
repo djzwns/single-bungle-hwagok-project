@@ -6,8 +6,9 @@ Item {
     QtObject {
         id: temperature
         property real value: 0
-        property real newValue: 22
-        property bool dirty: true
+        property real startValue: 0
+        property real endValue: 22
+        property real duration: 500
 
 //        SequentialAnimation on value {
 //            loops: Animation.Infinite
@@ -16,10 +17,10 @@ Item {
 //            NumberAnimation { to: radial.minValue; duration: 2000 }
 //        }
         NumberAnimation on value {
-            from: 0
-            to: temperature.newValue
-            duration: 1500
-            running: temperature.dirty
+            id: anim
+            from: temperature.startValue
+            to: temperature.endValue
+            duration: temperature.duration
         }
     }
 
@@ -33,6 +34,18 @@ Item {
     }
 
     function setTemp(temp) {
-        temperature.newValue = temp;
+        temperature.startValue = temperature.value;
+        temperature.endValue = temp;
+
+        let duration = Math.abs(temperature.endValue - temperature.startValue);
+        duration = duration < 10 ? 200 : 500;
+        temperature.duration = duration;
+        anim.restart();
+    }
+
+    function animRestart() {
+        temperature.startValue = 0;
+        temperature.duration = temperature.endValue < 10 ? 200 : 500;
+        anim.restart();
     }
 }
