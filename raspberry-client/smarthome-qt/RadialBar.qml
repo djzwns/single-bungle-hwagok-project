@@ -1,5 +1,5 @@
 import QtQuick 2.11
-import QtQuick.Shapes 1.12
+import QtQuick.Shapes 1.11
 import QtGraphicalEffects 1.0
 // https://github.com/arunpkqt/RadialBarDemo/blob/master/RadialBarShape.qml
 
