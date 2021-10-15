@@ -48,31 +48,30 @@ Item {
 
         TabButton {
 //            text: "Home"
-            property int status: 0
             onClicked: homeTab.animRestart()
             icon {
-                source: "images/3844435-home-house_110321.png"
+                source: "qrc:/images/3844435-home-house_110321.png"
             }
         }
 
         TabButton {
 //            text: "LED"
             icon {
-                source: "images/ceiling_light_icon_136808.png"
+                source: "qrc:/images/ceiling_light_icon_136808.png"
             }
         }
 
         TabButton {
 //            text: "Air"
             icon {
-                source: "images/wind-weather-lines-group-symbol_icon-icons.com_54629.png"
+                source: "qrc:/images/wind-weather-lines-group-symbol_icon-icons.com_54629.png"
             }
         }
 
         TabButton {
 //            text: "Config"
             icon {
-                source: "images/shield_lock_icon_136215.png"
+                source: "qrc:/images/shield_lock_icon_136215.png"
             }
         }
     }

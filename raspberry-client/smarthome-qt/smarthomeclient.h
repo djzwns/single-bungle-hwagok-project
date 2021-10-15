@@ -4,8 +4,6 @@
 #include <QObject>
 #include <QTcpSocket>
 #include <QHostAddress>
-#include <QInputDialog>
-#include <QMessageBox>
 
 #define BLOCK_SIZE 1024
 class SmartHomeClient : public QObject

@@ -7,12 +7,35 @@ function colorToInt(colorStr) {
     return { a: a1, r: r1, g: g1, b: b1, };
 }
 
+function hexPadStart(num, pad, sep) {
+    let str = num.toString(16);
+    let padLen = pad - str.length;
+    if (padLen <= 0)
+        return str;
+
+    let padStr = "";
+//    for (let i = 0; i < padLen; ++i)
+    let i = 0;
+    if (i++ < padLen)
+        padStr = padStr + sep;
+    if (i++ < padLen)
+        padStr = padStr + sep;
+    if (i++ < padLen)
+        padStr = padStr + sep;
+
+    return (padStr + str);
+}
+
 function intToColor(r, g, b, a) {
-    let color = "#"
-    color += a.toString(16).padStart(2, '0')
-            + r.toString(16).padStart(2, '0')
-            + g.toString(16).padStart(2, '0')
-            + b.toString(16).padStart(2, '0');
+    let color = "#";
+//    color += a.toString(16).padStart(2, '0')
+//            + r.toString(16).padStart(2, '0')
+//            + g.toString(16).padStart(2, '0')
+//            + b.toString(16).padStart(2, '0');
+    color += hexPadStart(a, 2, '0')
+            + hexPadStart(r, 2, '0')
+            + hexPadStart(g, 2, '0')
+            + hexPadStart(b, 2, '0');
     return color;
 }
 
