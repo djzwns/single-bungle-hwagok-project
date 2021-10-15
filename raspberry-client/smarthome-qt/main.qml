@@ -7,8 +7,9 @@ Window {
     title: qsTr("Smarthome")
 
     visible: true
-    width: 450
-    height: 700
+//    visibility: Window.FullScreen
+    width: 384
+    height: 640
 
     maximumWidth: width
     maximumHeight: height
