@@ -6,6 +6,7 @@ class Client:
 
     def __init__(self, host, port):
         self.address = (host, port)
+        self.secureMode = False
 
     def __del__(self):
         self.sock.close()
@@ -31,7 +32,12 @@ class Client:
                 data = self.sock.recv(1024)
                 if not data:
                     break
-                print(data.decode())
+                msg = data.decode()
+                print(msg)
+                if msg == "[admin]SECURE@ON":
+                    self.secureMode = True
+                elif msg == "[admin]SECURE@OFF":
+                    self.secureMode = False
             except:
                 pass
 
@@ -45,7 +51,7 @@ class Client:
 
             self.sock.send(msg.encode())
 
-    # def sendMsg(self, msg:str):
-    #     if msg[0] != '[':
-    #         msg = '[ALLMSG]' + msg
-    #     self.sock.send(msg.encode())
+    def send(self, msg:str):
+        if msg[0] != '[':
+            msg = '[ALLMSG]' + msg
+        self.sock.send(msg.encode())
