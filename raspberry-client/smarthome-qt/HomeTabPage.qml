@@ -38,6 +38,7 @@ Item {
     function setTemp(temp) {
         temperature.startValue = temperature.value;
         temperature.endValue = temp;
+        HomeProperty.currentTemperature = temp
 
         let duration = Math.abs(temperature.endValue - temperature.startValue);
         duration = duration < 10 ? 200 : 500;

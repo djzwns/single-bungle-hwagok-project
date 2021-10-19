@@ -105,7 +105,7 @@ Item {
     }
     Text {
         anchors.centerIn: parent
-        text: parseInt(radialBar.value.toString()) + "℃"
+        text: radialBar.value.toFixed().toString() + "℃"
         font.bold: true
         font.pixelSize: 30
     }

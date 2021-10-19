@@ -25,6 +25,12 @@ Item {
             }
         }
         Item {
+            Text {
+                width: 200
+                height: 100
+                text: HomeProperty.currentTemperature
+            }
+
             Rectangle {
                 implicitHeight: 50
                 implicitWidth: 50
@@ -32,10 +38,9 @@ Item {
             }
         }
         Item {
-            Rectangle {
-                implicitHeight: 50
-                implicitWidth: 50
-                color: "red"
+
+            SecureTabPage {
+                id: secureTab
             }
         }
     }
@@ -47,7 +52,7 @@ Item {
         currentIndex: swipeView.currentIndex
 
         TabButton {
-//            text: "Home"
+//            text: HomeProperty.currentTemperature
             onClicked: homeTab.animRestart()
             icon {
                 source: "qrc:/images/3844435-home-house_110321.png"
@@ -69,7 +74,8 @@ Item {
         }
 
         TabButton {
-//            text: "Config"
+//            text: "Secure"
+            onClicked: secureTab.videoUpdate()
             icon {
                 source: "qrc:/images/shield_lock_icon_136215.png"
             }

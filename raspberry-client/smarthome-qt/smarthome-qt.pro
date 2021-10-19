@@ -36,4 +36,5 @@ HEADERS += \
     connectwindow.h \
     smarthomeclient.h
 
-DISTFILES +=
+DISTFILES += \
+    qmldir
