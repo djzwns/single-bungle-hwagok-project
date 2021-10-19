@@ -11,10 +11,10 @@ class Client:
     def __del__(self):
         self.sock.close()
 
-    def init(self):
+    def init(self, id, pw):
             self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.sock.connect(self.address)
-            self.sock.send("[camera:camera]".encode())
+            self.sock.send(f"[{id}:{pw}]".encode())
 
     def run(self):        
         self.recvThread = Thread(target=self.recvMsg, daemon=True)
@@ -34,9 +34,9 @@ class Client:
                     break
                 msg = data.decode()
                 print(msg)
-                if msg == "[admin]SECURE@ON":
+                if msg == "[admin]SECURE@ON\n":
                     self.secureMode = True
-                elif msg == "[admin]SECURE@OFF":
+                elif msg == "[admin]SECURE@OFF\n":
                     self.secureMode = False
             except:
                 pass
