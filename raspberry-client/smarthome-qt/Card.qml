@@ -7,8 +7,8 @@ Rectangle {
     property string value: ""
     property color bgColor: "lightblue"
     property color shadowColor: "#7fffffff"
-
-    signal switchToggled(var check)
+    property string type: ""
+    property bool pointView: false
 
     id: card
     width: 150
@@ -21,7 +21,7 @@ Rectangle {
     ColumnLayout {
         id: contentLayout
         anchors.fill: parent
-        anchors.margins: 10
+        anchors.margins: 8
         spacing: 5
 
         Text {
@@ -46,10 +46,28 @@ Rectangle {
             Layout.alignment: Qt.AlignRight
         }
 
+        Rectangle {
+            id: point
+
+            width: sub.font.pixelSize * 0.6
+            height: width
+            anchors.right: sub.left
+            anchors.rightMargin: 4
+            anchors.verticalCenter: sub.verticalCenter
+            radius: Math.min(width, height) * 0.5
+            visible: card.pointView
+            color: {
+                let val = card.value.replace(/[^0-9]/g, '');
+                return  val < 31 ? "#ff32a1ff" :
+                        val < 81 ? "#ff00c73c" :
+                        val < 151? "#fffd9b5a" : "#ffff5959";
+            }
+        }
+
         Switch {
             id: toggle
             Layout.alignment: Qt.AlignRight
-            onToggled: switchToggled(checked)
+            type: card.type
         }
     }
 

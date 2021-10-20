@@ -175,8 +175,19 @@ Item {
         }
     }
 
-    function setTemp(temp) {
-        homeTab.setTemp(temp)
+    function setTemp(value, type) {
+        switch (type)
+        {
+        case "TEMP":
+            homeTab.setTemp(value);
+            break;
+        case "HUMI":
+            homeTab.setHumi(value);
+            break;
+        case "AIR":
+            homeTab.setAir(value);
+            break;
+        }
     }
 
     function getTabType() {

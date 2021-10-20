@@ -5,7 +5,7 @@ Item {
     id: toggleswitch
     width: background.width; height: background.height
 
-    signal toggled(var check)
+    signal toggled(var check, var type)
 
     readonly property bool checked: state === "on"
     property bool on: false
@@ -14,6 +14,7 @@ Item {
     property color bgColor: state === "on" ? Style.startColor : "lightgray"
     property color knobColor: "white"
     property color shadowColor: "#7f3d3d3d"
+    property string type: ""
 
     readonly property int minx: background.radius - knob.radius
     readonly property int maxx: background.width - knob.width - minx
@@ -24,7 +25,9 @@ Item {
         else
             toggleswitch.state = "on";
 
-        toggled(checked);
+        console.log(type);
+        root.cardToggled(checked, type);
+        toggled(checked, type);
     }
 
     function releaseSwitch() {

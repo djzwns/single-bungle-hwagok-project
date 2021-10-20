@@ -12,6 +12,7 @@ class SmartHomeClient : public QObject
 
 public:
     void connectToServer(QString id, QString pw);
+    QString getID() const { return this->ID; }
     explicit SmartHomeClient(QString ip, int port, QObject *parent = nullptr);
     ~SmartHomeClient();
 

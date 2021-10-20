@@ -19,6 +19,11 @@ Window {
     minimumWidth: width
     minimumHeight: height
 
+
+    /* signal functions */
+    signal sendData(var sendMsg)
+    signal cardToggled(var checked, var type)
+
     Item {
         anchors.fill: parent
         LinearGradient {
@@ -31,8 +36,6 @@ Window {
             }
         }
     }
-
-    signal sendData(var sendMsg)
 
     DevicePopup {
         id: popup

@@ -68,6 +68,7 @@ Item {
                 bgColor: tabRoot.primaryColor
                 text: "Humidity "
                 value: "20%"
+                type: "aircon"
             }
 
             Card {
@@ -75,7 +76,9 @@ Item {
 
                 bgColor: tabRoot.primaryColor
                 text: "Air Fresh "
-                value: "8ug/m"
+                value: "37㎍/m³"
+                type: "airfresh"
+                pointView: true
             }
         }
 
@@ -91,6 +94,7 @@ Item {
 
                 bgColor: tabRoot.primaryColor
                 text: "Secure "
+                type: "secure"
             }
 
             Card {
@@ -98,6 +102,7 @@ Item {
 
                 bgColor: tabRoot.primaryColor
                 text: "Warning "
+                type: "warning"
             }
         }
     }
@@ -113,6 +118,14 @@ Item {
         duration = duration < 10 ? 200 : 500;
         temperature.duration = duration;
         anim.restart();
+    }
+
+    function setHumi(humi) {
+        aircon.value = humi + "%";
+    }
+
+    function setAir(air) {
+        airfresh.value = air + "㎍/m³";
     }
 
     function animRestart() {

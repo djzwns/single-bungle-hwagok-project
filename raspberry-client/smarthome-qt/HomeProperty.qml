@@ -12,8 +12,5 @@ QtObject {
     property bool airfresher: false
     property bool secure: false
 
-    signal lightToggle(var check)
-    signal airconToggle(var check)
-    signal airfresherToggle(var check)
-    signal secureToggle(var check)
+    signal toggled(var checkd, var type)
 }
