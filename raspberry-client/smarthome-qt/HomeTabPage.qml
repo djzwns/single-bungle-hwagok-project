@@ -1,7 +1,10 @@
 import QtQuick 2.0
+import QtQuick.Controls 2.0
+import QtQuick.Layouts 1.1
 import "colorhelper.js" as ColorHelper
 
 Item {
+    id: tabRoot
     anchors.fill: parent
     QtObject {
         id: temperature
@@ -24,16 +27,82 @@ Item {
         }
     }
 
-    RadialBar {
-        id: radial
-        value: temperature.value
-        minValue: -20
-        maxValue: 40
-        progressColor: ColorHelper.tempColorLerp(valueRate)
-        width: 200
-        height: 200
-        anchors.centerIn: parent
+    property color primaryColor: "green"
+
+    ColumnLayout {
+        anchors.fill: parent
+        anchors.margins: 20
+        spacing: 5
+
+        Text {
+            id: title
+            text: "Home"
+            font.bold: true
+            font.pixelSize: 24
+            color: "white"
+        }
+
+        RadialBar {
+            id: radial
+            Layout.minimumWidth: 100
+            Layout.minimumHeight: 100
+            Layout.maximumWidth: 250
+            Layout.maximumHeight: 250
+            Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+            Layout.column: 1
+
+            value: temperature.value
+            minValue: -20
+            maxValue: 40
+            progressColor: tabRoot.primaryColor//ColorHelper.tempColorLerp(valueRate)
+        }
+
+        RowLayout {
+            id: cardGrid
+            spacing: 20
+            Layout.alignment: Qt.AlignHCenter
+
+            Card {
+                id: aircon
+
+                bgColor: tabRoot.primaryColor
+                text: "Humidity "
+                value: "20%"
+            }
+
+            Card {
+                id: airfresh
+
+                bgColor: tabRoot.primaryColor
+                text: "Air Fresh "
+                value: "8ug/m"
+            }
+        }
+
+        RowLayout {
+            id: cardGrid2
+            spacing: 20
+            anchors.top: cardGrid.bottom
+            anchors.topMargin: 20
+            Layout.alignment: Qt.AlignHCenter
+
+            Card {
+                id: secure
+
+                bgColor: tabRoot.primaryColor
+                text: "Secure "
+            }
+
+            Card {
+                id: warning
+
+                bgColor: tabRoot.primaryColor
+                text: "Warning "
+            }
+        }
     }
+
+
 
     function setTemp(temp) {
         temperature.startValue = temperature.value;

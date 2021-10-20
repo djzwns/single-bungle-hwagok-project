@@ -1,6 +1,7 @@
 import QtQuick 2.11
 import QtQuick.Window 2.11
 import QtQuick.Controls 2.0
+import QtGraphicalEffects 1.0
 import "."
 
 Window {
@@ -17,6 +18,19 @@ Window {
 
     minimumWidth: width
     minimumHeight: height
+
+    Item {
+        anchors.fill: parent
+        LinearGradient {
+            anchors.fill: parent
+            start: Qt.point(root.width, 0)
+            end: Qt.point(0, root.height)
+            gradient: Gradient {
+                GradientStop { position: 0.0; color: Style.startColor }
+                GradientStop { position: 1.0; color: Style.endColor }
+            }
+        }
+    }
 
     signal sendData(var sendMsg)
 

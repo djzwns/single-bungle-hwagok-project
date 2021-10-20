@@ -15,6 +15,7 @@ Item {
 
             HomeTabPage {
                 id: homeTab
+                primaryColor: "white"//Style.airconLightColor
             }
         }
         Item {
@@ -22,6 +23,13 @@ Item {
                 implicitHeight: 50
                 implicitWidth: 50
                 color: "green"
+            }
+        }
+        Item {
+            Rectangle {
+                implicitHeight: 50
+                implicitWidth: 50
+                color: "yellow"
             }
         }
         Item {
@@ -34,7 +42,7 @@ Item {
             Rectangle {
                 implicitHeight: 50
                 implicitWidth: 50
-                color: "blue"
+                color: "lightblue"
             }
         }
         Item {
@@ -47,42 +55,150 @@ Item {
 
     TabBar {
         id: tabBar
+
+        readonly property color iconColor: "#8fe5e5e5"//Style.backgroundColor(getTabType(), Style.light)
+        readonly property color iconPressedColor: Style.startColor//Style.backgroundColor(getTabType(), Style.normal)
+        readonly property string fontType: "Courier"
+
         width: parent.width
+        height: parent.height * 0.07
         anchors.bottom: parent.bottom
         currentIndex: swipeView.currentIndex
+        background: Rectangle {
+            color: "transparent"//tabBar.bgColor
+            radius: Math.min(parent.width, parent.heigth) * 0.5
+        }
+        Layout.alignment: Qt.AlignVCenter
 
         TabButton {
-//            text: HomeProperty.currentTemperature
-            onClicked: homeTab.animRestart()
+            id: home
+            font {
+                family: tabBar.fontType
+                weight: Font.bold
+            }
+
+            display: AbstractButton.TextUnderIcon
+            onClicked: {
+                homeTab.animRestart();
+            }
             icon {
-                source: "qrc:/images/3844435-home-house_110321.png"
+                name: "Home"
+                source: "qrc:/images/home.png"
+                color: tabBar.currentIndex === 0 ? "white" : tabBar.iconColor
+            }
+            background: Rectangle {
+                color: "transparent"//tabBar.bgColor
+                radius: Math.min(parent.width, parent.heigth) * 0.5
             }
         }
 
         TabButton {
-//            text: "LED"
+            id: led
+            font {
+                family: tabBar.fontType
+                weight: Font.bold
+            }
+            display: AbstractButton.TextUnderIcon
+            onClicked: {
+            }
             icon {
-                source: "qrc:/images/ceiling_light_icon_136808.png"
+                name: "LED"
+                source: "qrc:/images/light.png"
+                color: tabBar.currentIndex === 1 ? "white" : tabBar.iconColor
+            }
+            background: Rectangle {
+                color: "transparent"//tabBar.bgColor
+                radius: Math.min(parent.width, parent.heigth) * 0.5
             }
         }
 
         TabButton {
-//            text: "Air"
+            id: air
+            font {
+                family: tabBar.fontType
+                weight: Font.bold
+            }
+            display: AbstractButton.TextUnderIcon
+            onClicked: {
+            }
             icon {
-                source: "qrc:/images/wind-weather-lines-group-symbol_icon-icons.com_54629.png"
+                name: "Air"
+                source: "qrc:/images/aircon.png"
+                color: tabBar.currentIndex === 2 ? "white" : tabBar.iconColor
+            }
+            background: Rectangle {
+                color: "transparent"//tabBar.bgColor
+                radius: Math.min(parent.width, parent.heigth) * 0.5
             }
         }
 
         TabButton {
-//            text: "Secure"
-            onClicked: secureTab.videoUpdate()
+            id: stats
+            font {
+                family: tabBar.fontType
+                weight: Font.bold
+            }
+            display: AbstractButton.TextUnderIcon
+            onClicked: {
+                secureTab.videoUpdate()
+            }
             icon {
-                source: "qrc:/images/shield_lock_icon_136215.png"
+                name: "Stats"
+                source: "qrc:/images/chart.png"
+                color: tabBar.currentIndex === 3 ? "white" : tabBar.iconColor
+            }
+            background: Rectangle {
+                color: "transparent"//tabBar.bgColor
+                radius: Math.min(parent.width, parent.heigth) * 0.5
+            }
+        }
+
+        TabButton {
+            id: secure
+            font {
+                family: tabBar.fontType
+                weight: Font.bold
+            }
+            display: AbstractButton.TextUnderIcon
+            onClicked: {
+                secureTab.videoUpdate()
+            }
+            icon {
+                name: "Secure"
+                source: "qrc:/images/secure.png"
+                color: tabBar.currentIndex === 4 ? "white" : tabBar.iconColor
+            }
+            background: Rectangle {
+                color: "transparent"//tabBar.bgColor
+                radius: Math.min(parent.width, parent.heigth) * 0.5
             }
         }
     }
 
     function setTemp(temp) {
         homeTab.setTemp(temp)
+    }
+
+    function getTabType() {
+        console.log(tabBar.currentIndex)
+        if (HomeProperty.warning) {
+            return "warning";
+        }
+        return "aircon";
+//        switch (tabBar.currentIndex)
+//        {
+//        case 0:
+//            return "home";
+//        case 1:
+//            return "led";
+//        case 2:
+//            return "aircon";
+//        case 3:
+//            return "chart";
+//        case 4:
+//            return "secure";
+//        default:
+//            return "";
+//        }
     }
 }

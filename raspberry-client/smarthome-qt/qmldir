@@ -1,2 +1,3 @@
 # qmldir
 singleton HomeProperty HomeProperty.qml
+singleton Style Style.qml
