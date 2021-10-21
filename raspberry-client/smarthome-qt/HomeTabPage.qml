@@ -40,6 +40,7 @@ Item {
             font.bold: true
             font.pixelSize: 24
             color: "white"
+            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
         }
 
         RadialBar {

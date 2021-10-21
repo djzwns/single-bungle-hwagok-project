@@ -1,24 +1,32 @@
 import QtQuick 2.0
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.12
+import QtQuick.Layouts 1.1
 import "colorhelper.js" as ColorHelper
 
 Item {
     id: lightTapRoot
     anchors.fill: parent
 
-    ColorPicker {
-        id: colorSelector
-    }
+    ColumnLayout {
+        id: lightLayout
+        anchors.fill: parent
+        anchors.margins: 20
+        spacing: 20
 
-    Button {
-        width: 150
-        height: 60
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.top: colorSelector.bottom
-        id: setColorBtn
-        onClicked: {
-            root.colorChanged(ColorHelper.rgbToNumber(colorSelector.currentColor));
+        Text {
+            id: title
+            text: "Light"
+            font.bold: true
+            font.pixelSize: 24
+            color: "white"
+            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+        }
+
+        ColorPicker {
+            id: colorSelector
+            Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+            Layout.column: 1
         }
     }
 }
