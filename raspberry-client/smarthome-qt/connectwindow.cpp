@@ -82,7 +82,7 @@ void ConnectWindow::slotCardToggled(QVariant checked, QVariant type)
     bool check = checked.toBool();
     QString cardType = type.toString();
     QString checkString = check ? "ON\n" : "OFF\n";
-    checkString.push_front("[" + client->getID() + "]" + cardType + "@");
+    checkString.push_front("[" + cardType + "]" + cardType + "@");
     qDebug() << checkString;
     client->slotSocketSendData(checkString);
 }
