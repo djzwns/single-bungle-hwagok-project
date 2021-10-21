@@ -6,7 +6,6 @@ Rectangle {
     property string text: "Sample"
     property string value: ""
     property color bgColor: "lightblue"
-    property color shadowColor: "#7fffffff"
     property string type: ""
     property bool pointView: false
 
@@ -79,7 +78,7 @@ Rectangle {
             radius: 8
             samples: radius * 2
             source: card
-            color: card.shadowColor
+            color: Style.shadowColor
             transparentBorder: true
         }
     }

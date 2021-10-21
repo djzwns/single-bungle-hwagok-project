@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.11
 import QtQuick.Controls 2.0
 import QtQuick.Window 2.11
 import QtGraphicalEffects 1.0
@@ -37,10 +37,10 @@ Item {
             layer {
                 enabled: true
                 effect: DropShadow {
-                    radius: 4
+                    radius: 8
                     samples: radius * 2
                     source: devicePopup
-                    color: Qt.rgba(0, 0, 0, 0.5)
+                    color: "#7f000000" //Style.shadowColor
                     transparentBorder: true
                 }
             }
@@ -69,7 +69,7 @@ Item {
 
                         Text {
                             text: "\u2715 Deny"
-                            color: "#7289da"
+                            color: Style.startColor
                             font.bold: true
                             anchors.fill: parent
                             horizontalAlignment: Text.AlignHCenter
@@ -93,7 +93,7 @@ Item {
 
                         Text {
                             text: "\u2713 Allow"
-                            color: "#7289da"
+                            color: Style.startColor
                             font.bold: true
                             anchors.fill: parent
                             horizontalAlignment: Text.AlignHCenter
@@ -117,7 +117,7 @@ Item {
                     properties: "xScale, yScale"
                     from: 0.6
                     to: 1
-                    duration: 100
+                    duration: 150
                     easing: Easing.InOutBack
                 }
                 NumberAnimation {
@@ -125,7 +125,8 @@ Item {
                     properties: "background.opacity"
                     from: 0
                     to: 0.6
-                    duration: 100
+                    duration: 150
+                    easing: Easing.InOutBack
                 }
             }
         }
@@ -137,7 +138,7 @@ Item {
                     properties: "xScale, yScale"
                     from: 1
                     to: 0.6
-                    duration: 100
+                    duration: 150
                     easing: Easing.InOutBack
                 }
                 NumberAnimation {
@@ -145,7 +146,8 @@ Item {
                     properties: "background.opacity"
                     from: 0.6
                     to: 0
-                    duration: 100
+                    duration: 150
+                    easing: Easing.InOutBack
                 }
             }
         }

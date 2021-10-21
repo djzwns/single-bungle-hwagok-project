@@ -175,7 +175,7 @@ Item {
         }
     }
 
-    function setTemp(value, type) {
+    function setData(value, type) {
         switch (type)
         {
         case "TEMP":

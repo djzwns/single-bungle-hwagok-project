@@ -1,6 +1,8 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.0
 //import QtMultimedia 5.0
+//import QtWebEngine 1.0
+//import QtWebKit 3.0
 
 Item {
     signal videoCaptureButtonClicked();
@@ -33,4 +35,32 @@ Item {
         mediaPlayer.play();
     }
 */
+//    width: parent.width
+//    height: width * 0.75
+//    WebView {
+//        id: webview
+//        anchors.fill: parent
+//        opacity: 0
+//        url: "https://google.com"
+
+//        Behavior on opacity {
+//            NumberAnimation { duration: 200 }
+//        }
+
+//        onLoadingChanged: {
+//            switch (loadRequest.status)
+//            {
+//            case WebView.LoadSucceededStatus:
+//                opacity = 1;
+//                break;
+//            default:
+//                opacity = 0;
+//                break;
+//            }
+//        }
+
+//        onNavigationRequested: {
+//            request.action = WebView.AcceptRequest;
+//        }
+//    }
 }

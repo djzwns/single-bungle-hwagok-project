@@ -62,7 +62,7 @@ Window {
         popup.openDevicePopup(deviceId);
     }
 
-    function slotSetTemperature(temp) {
-        swipe.setTemp(temp);
+    function slotSetData(temp, type) {
+        swipe.setData(temp, type);
     }
 }

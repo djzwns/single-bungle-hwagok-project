@@ -35,11 +35,12 @@ void ConnectWindow::connectSignalSlot()
     connect(mainView, SIGNAL(sendData(QVariant)), this, SLOT(slotRecvData(QVariant)));
     connect(client, SIGNAL(signalSocketRecv(QString)), this, SLOT(slotRecvData(QString)));
 
-    connect(this, SIGNAL(signalRecvTemperature(QVariant)), mainView, SLOT(slotSetTemperature(QVariant)));
+    connect(this, SIGNAL(signalRecvData(QVariant, QVariant)), mainView, SLOT(slotSetData(QVariant, QVariant)));
     //emit signalDeviceConnect("TEST:Device ID");
     connect(mainView, SIGNAL(cardToggled(QVariant, QVariant)), this, SLOT(slotCardToggled(QVariant, QVariant)));
 }
 
+// qml 하고 통신용
 void ConnectWindow::slotRecvData(QVariant data)
 {
     QString string = data.toString();
@@ -47,6 +48,7 @@ void ConnectWindow::slotRecvData(QVariant data)
     client->slotSocketSendData(string);
 }
 
+// 서버랑 통신용
 void ConnectWindow::slotRecvData(QString data)
 {
     qDebug() << data;

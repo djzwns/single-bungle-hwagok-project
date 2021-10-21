@@ -73,4 +73,5 @@ QtObject {
     readonly property color endColor: "#ffffa45a"
 
     readonly property color normalColor: "#7fdddddd"
+    readonly property color shadowColor: "#7fffffff"
 }

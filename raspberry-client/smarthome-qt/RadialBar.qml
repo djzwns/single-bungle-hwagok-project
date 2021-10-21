@@ -68,7 +68,6 @@ Rectangle {
     property color backgroundColor: "transparent"
     property color dialColor: "#1f404040"
     property color progressColor: "#ffa51bab"
-    property color shadowColor: "#7fffffff"
 
     property int penStyle: Qt.RoundCap
     property int dialType: RadialBar.DialType.MinToMax
@@ -180,7 +179,7 @@ Rectangle {
             radius: 8
             samples: radius * 2
             source: radialBar
-            color: radialBar.shadowColor
+            color: Style.shadowColor
             transparentBorder: true
         }
     }

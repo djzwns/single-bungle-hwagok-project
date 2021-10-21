@@ -98,11 +98,11 @@ Item {
             }
 
             Card {
-                id: warning
+                id: curtain
 
                 bgColor: tabRoot.primaryColor
-                text: "Warning "
-                type: "warning"
+                text: "Curtain "
+                type: "curtain"
             }
         }
     }
