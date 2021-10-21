@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.1
 import "colorhelper.js" as ColorHelper
 
 Item {
-    id: tabRoot
+    id: homeTabRoot
     anchors.fill: parent
     QtObject {
         id: temperature
@@ -54,7 +54,7 @@ Item {
             value: temperature.value
             minValue: -20
             maxValue: 40
-            progressColor: tabRoot.primaryColor//ColorHelper.tempColorLerp(valueRate)
+            progressColor: homeTabRoot.primaryColor//ColorHelper.tempColorLerp(valueRate)
         }
 
         RowLayout {
@@ -65,7 +65,7 @@ Item {
             Card {
                 id: aircon
 
-                bgColor: tabRoot.primaryColor
+                bgColor: homeTabRoot.primaryColor
                 text: "Humidity "
                 value: "20%"
                 type: "aircon"
@@ -74,7 +74,7 @@ Item {
             Card {
                 id: airfresh
 
-                bgColor: tabRoot.primaryColor
+                bgColor: homeTabRoot.primaryColor
                 text: "Air Fresh "
                 value: "37㎍/m³"
                 type: "airfresh"
@@ -92,7 +92,7 @@ Item {
             Card {
                 id: secure
 
-                bgColor: tabRoot.primaryColor
+                bgColor: homeTabRoot.primaryColor
                 text: "Secure "
                 type: "secure"
             }
@@ -100,9 +100,9 @@ Item {
             Card {
                 id: curtain
 
-                bgColor: tabRoot.primaryColor
-                text: "Curtain "
-                type: "curtain"
+                bgColor: homeTabRoot.primaryColor
+                text: "Window "
+                type: "window"
             }
         }
     }

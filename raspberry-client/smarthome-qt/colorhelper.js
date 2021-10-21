@@ -7,6 +7,19 @@ function colorToInt(colorStr) {
     return { a: a1, r: r1, g: g1, b: b1, };
 }
 
+function rgbToHexColor(colorStr) {
+    let colorsplit = colorStr.split(/[^0-9]/g);
+    let r = hexPadStart(Number(colorsplit[4]), 2, '0');
+    let g = hexPadStart(Number(colorsplit[5]), 2, '0');
+    let b = hexPadStart(Number(colorsplit[6]), 2, '0');
+    return "#" + r + g + b;
+}
+
+function rgbToNumber(colorStr) {
+    let colorsplit = colorStr.split(/[^0-9]/g);
+    return colorsplit[4] + "," + colorsplit[5] + "," + colorsplit[6];
+}
+
 function hexPadStart(num, pad, sep) {
     let str = num.toString(16);
     let padLen = pad - str.length;

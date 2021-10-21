@@ -19,10 +19,9 @@ Item {
             }
         }
         Item {
-            Rectangle {
-                implicitHeight: 50
-                implicitWidth: 50
-                color: "green"
+
+            LightTapPage {
+                id: lightTap
             }
         }
         Item {

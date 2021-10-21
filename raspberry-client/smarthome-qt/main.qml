@@ -23,6 +23,7 @@ Window {
     /* signal functions */
     signal sendData(var sendMsg)
     signal cardToggled(var checked, var type)
+    signal colorChanged(var newColor);
 
     Item {
         anchors.fill: parent
