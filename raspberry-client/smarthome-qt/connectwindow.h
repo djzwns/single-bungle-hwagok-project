@@ -17,12 +17,15 @@ public:
 
 signals:
     void signalDeviceConnect(QVariant);
+    void signalWarning(QVariant);
+    void signalDetection(QVariant);
     void signalRecvData(QVariant, QVariant);
 
 private slots:
     void slotRecvData(QVariant);
     void slotRecvData(QString);
     void slotCardToggled(QVariant, QVariant);
+    void slotColorChanged(QVariant);
 
 private:
     void setWindow(QQuickWindow *window);

@@ -92,7 +92,8 @@ Item {
 
             Card {
                 id: secure
-
+                width: 94
+                height: 150 * 0.7
                 bgColor: homeTabRoot.primaryColor
                 text: "Secure "
                 type: "secure"
@@ -100,10 +101,20 @@ Item {
 
             Card {
                 id: curtain
-
+                width: 94
+                height: 150 * 0.7
                 bgColor: homeTabRoot.primaryColor
                 text: "Window "
                 type: "window"
+            }
+
+            Card {
+                id: light
+                width: 94
+                height: 150 * 0.7
+                bgColor: homeTabRoot.primaryColor
+                text: "Light "
+                type: "light"
             }
         }
     }

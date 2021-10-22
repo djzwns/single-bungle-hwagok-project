@@ -32,12 +32,15 @@ void ConnectWindow::setClient(SmartHomeClient *client)
 void ConnectWindow::connectSignalSlot()
 {
     connect(this, SIGNAL(signalDeviceConnect(QVariant)), mainView, SLOT(slotDeviceConnect(QVariant)));
-    connect(mainView, SIGNAL(sendData(QVariant)), this, SLOT(slotRecvData(QVariant)));
-    connect(client, SIGNAL(signalSocketRecv(QString)), this, SLOT(slotRecvData(QString)));
-
+    connect(this, SIGNAL(signalWarning(QVariant)), mainView, SLOT(slotWarning(QVariant)));
+    connect(this, SIGNAL(signalDetection(QVariant)), mainView, SLOT(slotDetection(QVariant)));
     connect(this, SIGNAL(signalRecvData(QVariant, QVariant)), mainView, SLOT(slotSetData(QVariant, QVariant)));
-    //emit signalDeviceConnect("TEST:Device ID");
+
     connect(mainView, SIGNAL(cardToggled(QVariant, QVariant)), this, SLOT(slotCardToggled(QVariant, QVariant)));
+    connect(mainView, SIGNAL(sendData(QVariant)), this, SLOT(slotRecvData(QVariant)));
+    connect(mainView, SIGNAL(colorChanged(QVariant)), this, SLOT(slotRecvData(QVariant)));
+
+    connect(client, SIGNAL(signalSocketRecv(QString)), this, SLOT(slotRecvData(QString)));
 }
 
 // qml 하고 통신용
@@ -58,7 +61,13 @@ void ConnectWindow::slotRecvData(QString data)
     if (dataList[1].compare("ACCOUNT") == 0) {
         emit signalDeviceConnect(dataList[0]);
 
-    } else if (dataList[1].compare("TEMP") == 0) {        
+    } else if (dataList[1].compare("warning") == 0) {
+        emit signalWarning(dataList[0]);
+
+    } else if (dataList[1].compare("detection") == 0) {
+        emit signalDetection(dataList[0]);
+
+    } else if (dataList[1].compare("TEMP") == 0) {
         bool ok = false;
         int temp = dataList[2].toInt(&ok);
         if (ok)
@@ -76,6 +85,8 @@ void ConnectWindow::slotRecvData(QString data)
         if (ok)
             emit signalRecvData(humi, dataList[1]);
 
+    } else if (dataList[1].compare("LIGHT") == 0) {
+        bool ok = false;
     }
 }
 
@@ -84,7 +95,17 @@ void ConnectWindow::slotCardToggled(QVariant checked, QVariant type)
     bool check = checked.toBool();
     QString cardType = type.toString();
     QString checkString = check ? "ON\n" : "OFF\n";
-    checkString.push_front("[" + cardType + "]" + cardType + "@");
+    if (cardType == "airfresh")
+        checkString.push_front("[aircon]" + cardType + "@");
+    else
+        checkString.push_front("[" + cardType + "]" + cardType + "@");
     qDebug() << checkString;
     client->slotSocketSendData(checkString);
+}
+
+void ConnectWindow::slotColorChanged(QVariant color)
+{
+    QString colorString = color.toString();
+    qDebug() << colorString;
+    client->slotSocketSendData(colorString);
 }

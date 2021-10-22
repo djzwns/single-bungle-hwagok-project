@@ -53,6 +53,40 @@ Window {
         }
     }
 
+    DevicePopup {
+        id: warning
+        property string deviceId: ""
+        leftBtnText: "\u2715 Cancel"
+        rightBtnText: "\u2713 OK"
+        onButtonAllowClicked: {
+            // popup signal execute
+            // send to server: [admin]ACCOUNTOK
+            sendData("[" + deviceId + "]warning@OFF")
+        }
+        onButtonDenyClicked: {
+            // popup signal execute
+            // send to server: [admin]ACCOUNTFAIL
+            sendData("[" + deviceId + "]warning@ON")
+        }
+    }
+
+    DevicePopup {
+        id: detection
+        property string deviceId: ""
+        leftBtnText: "\u2715 Cancel"
+        rightBtnText: "\u2713 OK"
+        onButtonAllowClicked: {
+            // popup signal execute
+            // send to server: [admin]ACCOUNTOK
+            sendData("[" + deviceId + "]secure@OFF\n")
+        }
+        onButtonDenyClicked: {
+            // popup signal execute
+            // send to server: [admin]ACCOUNTFAIL
+            sendData("[" + deviceId + "]sercure@ON\n")
+        }
+    }
+
     SwipePage {
         id: swipe
         anchors.fill: parent
@@ -60,7 +94,17 @@ Window {
 
     function slotDeviceConnect(deviceId) {
         popup.deviceId = deviceId;
-        popup.openDevicePopup(deviceId);
+        popup.openDevicePopup("Allow<br><b><i>" + deviceId + "</i></b><br>to access your server?");
+    }
+
+    function slotWarning(deviceId) {
+        warning.deviceId = deviceId;
+        warning.openDevicePopup("Warning!!<br>FIRE BROKE OUT!!");
+    }
+
+    function slotDetection(deviceId) {
+        detection.deviceId = deviceId;
+        detection.openDevicePopup("Warning!!<br>Intruder Appeared!!");
     }
 
     function slotSetData(temp, type) {

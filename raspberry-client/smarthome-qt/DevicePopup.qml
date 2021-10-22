@@ -4,12 +4,15 @@ import QtQuick.Window 2.11
 import QtGraphicalEffects 1.0
 
 Item {
-
+    id: popupParent
     signal buttonAllowClicked()
     signal buttonDenyClicked()
 
     width: parent.width
     height: parent.height
+
+    property string leftBtnText: "\u2715 Deny"
+    property string rightBtnText: "\u2713 Allow"
 
     Popup {
         id: rootPopup
@@ -68,7 +71,7 @@ Item {
                         }
 
                         Text {
-                            text: "\u2715 Deny"
+                            text: popupParent.leftBtnText
                             color: Style.startColor
                             font.bold: true
                             anchors.fill: parent
@@ -92,7 +95,7 @@ Item {
                         }
 
                         Text {
-                            text: "\u2713 Allow"
+                            text: popupParent.rightBtnText
                             color: Style.startColor
                             font.bold: true
                             anchors.fill: parent
@@ -153,8 +156,8 @@ Item {
         }
     }
 
-    function openDevicePopup(id) {
-        popupText.text = "Allow<br><b><i>" + id + "</i></b><br>to access your server?";
+    function openDevicePopup(str) {
+        popupText.text = str
         rootPopup.open();
     }
 

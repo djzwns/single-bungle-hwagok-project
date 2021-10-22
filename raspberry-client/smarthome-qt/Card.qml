@@ -8,6 +8,8 @@ Rectangle {
     property color bgColor: "lightblue"
     property string type: ""
     property bool pointView: false
+    property real switchWidth: 60
+    property real switchHeight: 30
 
     id: card
     width: 150
@@ -65,6 +67,8 @@ Rectangle {
 
         Switch {
             id: toggle
+            bgWidth: card.switchWidth
+            bgHeight: card.switchHeight
             Layout.alignment: Qt.AlignRight
             type: card.type
         }

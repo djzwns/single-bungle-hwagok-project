@@ -1,4 +1,6 @@
 import QtQuick 2.0
+import QtQuick.Controls 2.0
+import QtQuick.Window 2.0
 import QtGraphicalEffects 1.0
 import "colorhelper.js" as ColorHelper
 
@@ -27,6 +29,7 @@ Item {
         readonly property real degree_3: Math.PI * 1.2  // 144~215
         readonly property real degree_4: Math.PI * 1.6  // 216~287, 288~359
         readonly property real deg2rad: Math.PI / 180
+        readonly property real rad2deg: 180 / Math.PI
 
         property real saturate: 0
 
@@ -49,21 +52,35 @@ Item {
 
             // 2d 스크린이라 y 축 방향 주의
             if (xPosOffset === 0 && yPosOffset === 0)   // 0
-                angle = 0;
-            else if (xPosOffset < 0 && yPosOffset < 0)  // 2사분면
-                angle = radian * 180 / Math.PI;
-            else if (xPosOffset === 0 && yPosOffset < 0)// 90
-                angle = 90;
-            else if (xPosOffset > 0 && yPosOffset < 0)  // 1사분면
-                angle = 180 - radian * 180 / Math.PI;
-            else if (xPosOffset > 0 && yPosOffset === 0)// 180
                 angle = 180;
-            else if (xPosOffset > 0 && yPosOffset > 0)  // 4사분면
-                angle = 180 + radian * 180 / Math.PI;
-            else if (xPosOffset === 0 && yPosOffset > 0)// 270
+            else if (xPosOffset > 0 && yPosOffset < 0)  // 1사분면
+                angle = 360 - radian * rad2deg
+            else if (xPosOffset === 0 && yPosOffset < 0)// 90
                 angle = 270;
+            else if (xPosOffset < 0 && yPosOffset < 0)  // 2사분면
+                angle = 180 + radian * rad2deg
+            else if (xPosOffset > 0 && yPosOffset === 0)// 180
+                angle = 0;
             else if (xPosOffset < 0 && yPosOffset > 0)  // 3사분면
-                angle = 360 - radian * 180 / Math.PI;
+                angle = 180 - radian * rad2deg
+            else if (xPosOffset === 0 && yPosOffset > 0)// 270
+                angle = 90;
+            else if (xPosOffset > 0 && yPosOffset > 0)  // 4사분면
+                angle = radian * rad2deg
+//            else if (xPosOffset > 0 && yPosOffset < 0)  // 1사분면
+//                angle = 180 - radian * rad2deg
+//            else if (xPosOffset === 0 && yPosOffset < 0)// 90
+//                angle = 90;
+//            else if (xPosOffset < 0 && yPosOffset < 0)  // 2사분면
+//                angle = radian * rad2deg
+//            else if (xPosOffset > 0 && yPosOffset === 0)// 180
+//                angle = 180;
+//            else if (xPosOffset < 0 && yPosOffset > 0)  // 3사분면
+//                angle = 360 - radian * rad2deg
+//            else if (xPosOffset === 0 && yPosOffset > 0)// 270
+//                angle = 270;
+//            else if (xPosOffset > 0 && yPosOffset > 0)  // 4사분면
+//                angle = 180 + radian * rad2deg
 
             return angle;
         }
@@ -90,7 +107,7 @@ Item {
             width: parent.width * 0.2
             height: width
             radius: width * 0.5
-            color: ColorHelper.rgbToHexColor(pickerRoot.currentColor)//control.color
+            color: control.color
             z: 5
 
             layer {
@@ -172,8 +189,9 @@ Item {
                 let iSectors = 360;
                 let iSectorAngle = (360/iSectors)/180 * Math.PI;
                 ctx.translate(width * 0.5, height * 0.5);
-                for (let i = 0; i < iSectors; ++i) {
-                    let startAngle = 180 * Math.PI / 180;
+                let i = 0;
+                while (i < iSectors) {
+                    let startAngle = 0;
                     let endAngle = startAngle + iSectorAngle;
                     let radius = width * 0.5 - 1;
                     let color = control.getAngleColor(i, 1, 1);
@@ -189,6 +207,7 @@ Item {
                     ctx.fillStyle = gradient;//'rgb(' + color + ')';
                     ctx.fill();
                     ctx.rotate(iSectorAngle);
+                    i+=1;
                 }
                 ctx.restore();
 
@@ -221,30 +240,49 @@ Item {
             }
         }
 
-//        Rectangle {
-//            id: brightness
+        Rectangle {
+            id: brightness
+            width: canvas.width * 1.3
+            height: 15
+            radius: width * 0.02
+            border.color: "lightgray"
+            border.width: 2
+            anchors.top: canvas.bottom
+            anchors.topMargin: 30
+            x: 15
 
-//            anchors {
-//                top: canvas.bottom
-//                left: control.left
-//                right: control.right
-//                leftMargin: 12
-//                rightMargin: 12
-//                topMargin: 25
-//            }
-//            radius: width * 0.05
-//            clip: true
+            LinearGradient {
+                anchors.fill: parent
+                start: Qt.point(0, 0)
+                end: Qt.point(width, 0)
+                GradientStop { position: 0.0; color: "black" }
+                GradientStop { position: 1.0; color: ColorHelper.rgbToHexColor(pickerRoot.currentColor) }
+            }
+        }
 
-//            height: 20
+        Rectangle {
+            id: colorView
+            width: canvas.width * 1.3
+            height: width * 0.3
+            radius: width * 0.02
+            border.color: "lightgray"
+            border.width: 2
+            color: ColorHelper.rgbToHexColor(pickerRoot.currentColor)
+            anchors.top: brightness.bottom
+            anchors.topMargin: 30
+            x: 15
+            z:2
 
-//            LinearGradient {
-//                anchors.fill: parent
-//                start: Qt.point(0, 0)
-//                end: Qt.point(width, 0)
-//                GradientStop { position: 0.0; color: "black" }
-//                GradientStop { position: 1.0; color: ColorHelper.rgbToHexColor(pickerRoot.currentColor) }
-//            }
-//        }
+            MouseArea {
+                id: colorViewMouseArea
+                anchors.fill: colorView
+                onClicked: {
+                    let colorMsg = "[light]light@" + ColorHelper.rgbToNumber(pickerRoot.currentColor) + "\n";
+                    console.log(colorMsg);
+                    root.colorChanged(colorMsg);
+                }
+            }
+        }
     }
 
 

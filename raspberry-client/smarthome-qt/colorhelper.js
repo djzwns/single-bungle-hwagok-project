@@ -12,7 +12,8 @@ function rgbToHexColor(colorStr) {
     let r = hexPadStart(Number(colorsplit[4]), 2, '0');
     let g = hexPadStart(Number(colorsplit[5]), 2, '0');
     let b = hexPadStart(Number(colorsplit[6]), 2, '0');
-    return "#" + r + g + b;
+    let color = "#ff" + r + g + b;
+    return color;
 }
 
 function rgbToNumber(colorStr) {
@@ -29,12 +30,10 @@ function hexPadStart(num, pad, sep) {
     let padStr = "";
 //    for (let i = 0; i < padLen; ++i)
     let i = 0;
-    if (i++ < padLen)
+    while (i < padLen) {
         padStr = padStr + sep;
-    if (i++ < padLen)
-        padStr = padStr + sep;
-    if (i++ < padLen)
-        padStr = padStr + sep;
+        i += 1;
+    }
 
     return (padStr + str);
 }
