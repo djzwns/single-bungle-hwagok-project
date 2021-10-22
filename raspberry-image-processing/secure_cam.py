@@ -24,7 +24,7 @@ if not status:
 HOST = "192.168.10.88"
 PORT = 5000
 client = Client(HOST, PORT)
-client.init("guest1", "guest")
+client.init("secure", "secure")
 client.run()
 
 SCALE_FACTOR = 1.2
@@ -34,7 +34,7 @@ frameHeight = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 frameSize = (frameWidth, frameHeight)
 print ('frameSize={}'.format(frameSize))
 
-cascade = cv2.CascadeClassifier("./haarcascades/haarcascade_eye.xml")
+cascade = cv2.CascadeClassifier("./haarcascades/haarcascade_upperbody.xml")
 
 # # dnn 
 # model_name = "./SSD/MobileNetSSD_deploy.caffemodel"
@@ -42,7 +42,7 @@ cascade = cv2.CascadeClassifier("./haarcascades/haarcascade_eye.xml")
 # CONF_VALUE = 0.5
 # model = cv2.dnn.readNetFromCaffe(prototxt_name, model_name)
 
-FPS = 10 # ÃÊ´ç 10 ÇÁ·¹ÀÓ
+FPS = 10 # ï¿½Ê´ï¿½ 10 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 secPerFrame = 1.0 / FPS
 currentTime = 0
 prevTime = 0
@@ -63,8 +63,9 @@ while True:
 	if client.secureMode is False:
 		continue
 
-	# ¿µ»ó Ã³¸® ½ÃÀÛ
+	# ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	factor = 0.5
+	frame = cv2.resize(frame, (0, 0), fx=factor, fy=factor, interpolation=cv2.INTER_AREA)
 	gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 	# gray = cv2.resize(gray, (0, 0), fx=factor, fy=factor, interpolation=cv2.INTER_AREA)
 	body = cascade.detectMultiScale(gray, SCALE_FACTOR, 3)
@@ -72,15 +73,15 @@ while True:
 	if len(body) > 0:
 		detectionCnt += 1
 
-	if detectionCnt >= FPS: # 1ÃÊ¸¶´Ù Àü¼Û		
-		client.send("[admin]DETECTION@ON\n")
+	if detectionCnt >= FPS: # 1ï¿½Ê¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½		
+		client.send("[admin]detection@ON\n")
 		detectionCnt = 0
 
-	# for (x, y, w, h) in body:		
-	# 	# fx, fy = (int(x / factor), int(y / factor))
-	# 	# fw, fh = (int(fx + (w / factor)), int(fy + (h / factor)))
-	# 	# cv2.rectangle(frame, (fx, fy), (fx + fw, fy + fh), (0, 255, 0), 1)
-	# 	cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 1)
+	for (x, y, w, h) in body:		
+		# fx, fy = (int(x / factor), int(y / factor))
+		# fw, fh = (int(fx + (w / factor)), int(fy + (h / factor)))
+		# cv2.rectangle(frame, (fx, fy), (fx + fw, fy + fh), (0, 255, 0), 1)
+		cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 1)
 
 	
 	## DNN
@@ -112,7 +113,7 @@ while True:
 
 	# findObjects(outputs, frame)
 
-	# cv2.imshow('cctv', frame)
+	cv2.imshow('cctv', frame)
 
 	if cv2.waitKey(1) == 27:
 		break

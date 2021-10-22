@@ -34,9 +34,9 @@ class Client:
                     break
                 msg = data.decode()
                 print(msg)
-                if msg == "[admin]SECURE@ON\n":
+                if msg == "[admin]secure@ON\n\n":
                     self.secureMode = True
-                elif msg == "[admin]SECURE@OFF\n":
+                elif msg == "[admin]secure@OFF\n\n":
                     self.secureMode = False
             except:
                 pass
