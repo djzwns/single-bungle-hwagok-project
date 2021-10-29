@@ -5,18 +5,27 @@ IoT Smart Home
 0. 시연 예시
 	- qt ui 영상
 	- <img src="https://user-images.githubusercontent.com/17754057/139478657-8058e0aa-275a-462e-98ec-8a9be24e2f7f.gif" height="480">
+	- qml 을 활용한 스와이프탭, 컬러셀렉터, 애니메이션
 	-------------
 	- 서버 구동 및 qt 실행
 	- <img src="https://user-images.githubusercontent.com/17754057/139481137-f33c2229-e1c3-4d7b-b070-cb9f6f699d36.gif" height="480">
+	- 라즈베리파이 서버 동작 이후 관리자(qt) 컨트롤러 실행
 	-------------
 	- 미등록 카메라 기기 연결 및 카메라 실행
 	- <img src="https://user-images.githubusercontent.com/17754057/139481169-ad35976a-5b10-46be-b0bd-fe52f8d8a091.gif" height="480">
+	- 미등록 기기 연결 시도 시에 qt화면에 팝업창 출력 후 수락, 거절 선택
 	-------------
 	- 침입자 감지
 	- <img src="https://user-images.githubusercontent.com/17754057/139481196-2c730963-6fc9-4b98-9503-f41a47ca10fb.gif" height="480">
+	- 침입자 발생시 팝업
 	-------------
-	- 커튼 동작
+	- 스마트홈 동작
 	- <img src="https://user-images.githubusercontent.com/17754057/139482277-09f0800c-d20f-4e35-92df-683ecdb8be02.gif">
+	- qt앱을 통한 커튼 제어
+	-------------
+	- 무드등 조명 설정
+	- <img src="https://user-images.githubusercontent.com/17754057/139482937-467b0b29-c1a9-46b5-9f7f-115b970c68a9.gif">
+	- qt앱을 통한 조명 on/off 및 색상 설정
 	-------------
 
 
