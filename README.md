@@ -15,6 +15,9 @@ IoT Smart Home
 	- 침입자 감지
 	- <img src="https://user-images.githubusercontent.com/17754057/139481196-2c730963-6fc9-4b98-9503-f41a47ca10fb.gif" height="480">
 	-------------
+	- 커튼 동작
+	- <img src="https://user-images.githubusercontent.com/17754057/139482277-09f0800c-d20f-4e35-92df-683ecdb8be02.gif">
+	-------------
 
 
 1. raspberry-client
